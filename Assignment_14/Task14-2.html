@@ -1,0 +1,91 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Info Portal</title>
+    <!-- Combined HTML + CSS: responsive nav, centered content, footer styling -->
+    <style>
+      :root {
+        --bg: #f7f8fb;
+        --card: #ffffff;
+        --accent: #2b7cff;
+        --muted: #6b7280;
+        --footer-bg: #f3f4f6; /* light gray */
+      }
+      html, body { height: 100%; margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: var(--bg); color: #111827; }
+      .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+      header.site-header { background: linear-gradient(90deg, rgba(43,124,255,0.12), rgba(43,124,255,0.06)); border-radius: 8px; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+      .brand { display:flex; align-items:center; gap:0.75rem; }
+      .logo { width:48px; height:48px; background:var(--accent); color:#fff; display:inline-flex; align-items:center; justify-content:center; border-radius:8px; font-weight:700; }
+      .nav-wrap { display:flex; align-items:center; gap:1rem; }
+      .nav-toggle { display:none; }
+      .nav-toggle-label { display:none; width:36px; height:36px; align-items:center; justify-content:center; border-radius:6px; cursor:pointer; }
+      .nav-toggle-label span { display:block; width:20px; height:2px; background:var(--accent); position:relative; }
+      .nav-toggle-label span::before, .nav-toggle-label span::after { content:''; position:absolute; left:0; width:20px; height:2px; background:var(--accent); }
+      .nav-toggle-label span::before { top:-6px; }
+      .nav-toggle-label span::after { top:6px; }
+      nav.main-nav ul { list-style:none; margin:0; padding:0; display:flex; gap:0.75rem; }
+      nav.main-nav a { text-decoration:none; color:var(--accent); padding:0.5rem 0.75rem; border-radius:6px; }
+      nav.main-nav a:hover { background: rgba(43,124,255,0.08); }
+      main.card { background:var(--card); margin-top:1rem; padding:2rem; border-radius:8px; box-shadow:0 1px 2px rgba(15,23,42,0.04); }
+      .centered { max-width:800px; margin:0 auto; text-align:center; }
+      .quick-links { margin-top:1.25rem; display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+      .quick-links .card { flex:1 1 200px; background:#f8fafc; padding:0.75rem; border-radius:6px; min-width:180px; }
+      .quick-links .card div { color:var(--muted); font-size:0.9rem; }
+      footer.site-footer { margin-top:1.25rem; padding:1rem; text-align:center; color:var(--muted); font-size:0.9rem; background:var(--footer-bg); border-radius:8px; }
+      @media (max-width: 800px) { header.site-header { flex-direction:row; align-items:center; } nav.main-nav { order: 2; } }
+      @media (max-width: 600px) {
+        .nav-toggle-label { display:flex; }
+        nav.main-nav { position:absolute; top:68px; left:0; right:0; background:var(--card); margin:0.5rem; padding:1rem; border-radius:8px; display:none; box-shadow:0 6px 18px rgba(2,6,23,0.08); }
+        .nav-toggle:checked + .nav-toggle-label + nav.main-nav { display:block; }
+        nav.main-nav ul { flex-direction:column; gap:0.5rem; }
+        header.site-header { padding-bottom:0.5rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="site-header">
+        <div class="brand">
+          <div class="logo">SI</div>
+          <div>
+            <h1 style="margin:0; font-size:1.125rem;">Student Info Portal</h1>
+            <p style="margin:0; color:var(--muted); font-size:0.9rem;">Manage students, courses, and grades</p>
+          </div>
+        </div>
+        <div class="nav-wrap">
+          <input class="nav-toggle" type="checkbox" id="nav-toggle">
+          <label class="nav-toggle-label" for="nav-toggle" aria-hidden="true"><span></span></label>
+          <nav class="main-nav" aria-label="Main navigation">
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#students">Students</a></li>
+              <li><a href="#courses">Courses</a></li>
+              <li><a href="#grades">Grades</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+      <main class="card" role="main">
+        <div class="centered">
+          <section>
+            <h2>Welcome</h2>
+            <p>This portal provides a simple interface to view and manage student information. Use the navigation above to browse students, courses, and grades.</p>
+          </section>
+          <section class="quick-links" aria-label="Quick links">
+            <div class="card">📚 <strong>Students</strong><div>View and search student records</div></div>
+            <div class="card">🧾 <strong>Courses</strong><div>Manage courses and schedules</div></div>
+            <div class="card">📝 <strong>Grades</strong><div>Enter and review grades</div></div>
+          </section>
+        </div>
+      </main>
+      <footer class="site-footer">
+        <div>&copy; 2025 Student Info Portal — Built for demonstration</div>
+        <div style="margin-top:0.25rem;"><a href="#contact" style="color:var(--accent); text-decoration:none;">Contact support</a></div>
+      </footer>
+    </div>
+  </body>
+</html>

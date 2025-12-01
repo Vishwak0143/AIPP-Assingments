@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Info Portal</title>
+    <!-- Minimal styling for layout and readability -->
+    <style>
+      :root {
+        --bg: #f7f8fb;
+        --card: #ffffff;
+        --accent: #2b7cff;
+        --muted: #6b7280;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        background: var(--bg);
+        color: #111827;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      header.site-header {
+        background: linear-gradient(90deg, rgba(43,124,255,0.12), rgba(43,124,255,0.06));
+        border-radius: 8px;
+        padding: 1rem 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      header .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .logo {
+        width: 48px;
+        height: 48px;
+        background: var(--accent);
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        font-weight: 700;
+      }
+      nav.main-nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 0.75rem;
+      }
+      nav.main-nav a {
+        text-decoration: none;
+        color: var(--accent);
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+      }
+      nav.main-nav a:hover {
+        background: rgba(43,124,255,0.08);
+      }
+      main.card {
+        background: var(--card);
+        margin-top: 1rem;
+        padding: 1.25rem;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+      }
+      footer.site-footer {
+        margin-top: 1.25rem;
+        padding: 1rem;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      /* Responsive adjustments */
+      @media (max-width: 600px) {
+        header.site-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+        nav.main-nav ul { flex-wrap: wrap; gap: 0.5rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header: site title + quick actions -->
+      <header class="site-header">
+        <div class="brand">
+          <div class="logo">SI</div>
+          <div>
+            <h1 style="margin:0; font-size:1.125rem;">Student Info Portal</h1>
+            <p style="margin:0; color:var(--muted); font-size:0.9rem;">Manage students, courses, and grades</p>
+          </div>
+        </div>
+        <!-- Navigation: primary site sections -->
+        <nav class="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#students">Students</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#grades">Grades</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <!-- Main content placeholder -->
+      <main class="card" role="main">
+        <!-- Brief welcome / description -->
+        <section>
+          <h2>Welcome</h2>
+          <p>This portal provides a simple interface to view and manage student information. Use the navigation above to browse students, courses, and grades.</p>
+        </section>
+
+        <!-- Example quick links / cards -->
+        <section style="margin-top:1rem; display:flex; gap:1rem; flex-wrap:wrap;">
+          <div style="flex:1 1 200px; background:#f8fafc; padding:0.75rem; border-radius:6px;">📚 <strong>Students</strong><div style="color:var(--muted); font-size:0.9rem;">View and search student records</div></div>
+          <div style="flex:1 1 200px; background:#f8fafc; padding:0.75rem; border-radius:6px;">🧾 <strong>Courses</strong><div style="color:var(--muted); font-size:0.9rem;">Manage courses and schedules</div></div>
+          <div style="flex:1 1 200px; background:#f8fafc; padding:0.75rem; border-radius:6px;">📝 <strong>Grades</strong><div style="color:var(--muted); font-size:0.9rem;">Enter and review grades</div></div>
+        </section>
+      </main>
+
+      <!-- Footer: small print and links -->
+      <footer class="site-footer">
+        <!-- Footer content: copyright and contact -->
+        <div>&copy; 2025 Student Info Portal — Built for demonstration</div>
+        <div style="margin-top:0.25rem;"><a href="#contact" style="color:var(--accent); text-decoration:none;">Contact support</a></div>
+      </footer>
+    </div>
+  </body>
+</html>

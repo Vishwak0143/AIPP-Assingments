@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Form — JS Validation Demo</title>
+    <style>
+      :root {
+        --bg: #f7f8fb;
+        --card: #ffffff;
+        --accent: #2b7cff;
+        --muted: #6b7280;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        background: var(--bg);
+        color: #111827;
+      }
+      .container {
+        max-width: 400px;
+        margin: 4rem auto;
+        padding: 0 1rem;
+      }
+      .login-card {
+        background: var(--card);
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+      }
+      .login-card h1 {
+        margin-top: 0;
+        font-size: 1.5rem;
+        text-align: center;
+        color: var(--accent);
+      }
+      .form-group {
+        margin-bottom: 1.25rem;
+      }
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #374151;
+      }
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 6px;
+        font-size: 1rem;
+        box-sizing: border-box;
+        transition: border-color 0.2s;
+      }
+      input:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
+      input[aria-invalid="true"] {
+        border-color: crimson;
+        background-color: rgba(220, 38, 38, 0.05);
+      }
+      .field-error {
+        color: crimson;
+        font-size: 0.95rem;
+        margin-top: 0.3rem;
+        display: block;
+      }
+      .form-summary {
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        border-radius: 6px;
+        text-align: center;
+        font-weight: 500;
+        display: none;
+      }
+      .form-summary[style*="color: crimson"] {
+        display: block;
+        background-color: rgba(220, 38, 38, 0.1);
+      }
+      button {
+        width: 100%;
+        padding: 0.75rem;
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      button:hover {
+        background: #1d5fdb;
+      }
+      button:active {
+        background: #1450c0;
+      }
+      .success-message {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        background-color: #dcfce7;
+        color: #166534;
+        border-radius: 6px;
+        text-align: center;
+        font-weight: 500;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="login-card">
+        <h1>🔐 Login</h1>
+
+        <!-- Login form with validation -->
+        <form id="loginForm">
+          <!-- Form-level error summary (populated by script) -->
+          <div class="form-summary" aria-live="polite"></div>
+
+          <!-- Username field -->
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter your username"
+              autocomplete="username"
+            />
+          </div>
+
+          <!-- Password field -->
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+            />
+          </div>
+
+          <!-- Submit button -->
+          <button type="submit">Login</button>
+        </form>
+
+        <!-- Success message (shown after validation passes) -->
+        <div class="success-message" id="successMsg">
+          ✓ Login successful! (Demo — no backend)
+        </div>
+      </div>
+    </div>
+
+    <!-- Validation script (inline for demo) -->
+    <script>
+      console.log('Working on submit JS validation. Clear error messages if inputs are empty');
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('loginForm');
+        if (!form) {
+          return;
+        }
+
+        const username = form.querySelector('input[name="username"]');
+        const password = form.querySelector('input[name="password"]');
+        const summary = form.querySelector('.form-summary');
+        const successMsg = document.getElementById('successMsg');
+
+        function makeErrorElement(msg) {
+          const el = document.createElement('div');
+          el.className = 'field-error';
+          el.textContent = msg;
+          return el;
+        }
+
+        function clearError(input) {
+          if (!input) return;
+          input.removeAttribute('aria-invalid');
+          const next = input.nextElementSibling;
+          if (next && next.classList && next.classList.contains('field-error')) {
+            next.remove();
+          }
+        }
+
+        function showError(input, message) {
+          if (!input) return;
+          clearError(input);
+          const err = makeErrorElement(message);
+          input.setAttribute('aria-invalid', 'true');
+          input.parentNode.insertBefore(err, input.nextSibling);
+        }
+
+        form.addEventListener('submit', function (ev) {
+          ev.preventDefault();
+
+          summary.textContent = '';
+          summary.style.color = '';
+          successMsg.style.display = 'none';
+
+          let valid = true;
+
+          const uval = username && username.value ? username.value.trim() : '';
+          const pval = password && password.value ? password.value.trim() : '';
+
+          if (!uval) {
+            showError(username, '✕ Username cannot be empty');
+            valid = false;
+          }
+
+          if (!pval) {
+            showError(password, '✕ Password cannot be empty');
+            valid = false;
+          }
+
+          if (!valid) {
+            if (username && username.getAttribute('aria-invalid') === 'true') {
+              username.focus();
+            } else if (password && password.getAttribute('aria-invalid') === 'true') {
+              password.focus();
+            }
+            summary.textContent = 'Please fix the errors above and resubmit the form.';
+            summary.style.color = 'crimson';
+          } else {
+            // Validation passed
+            successMsg.style.display = 'block';
+            console.log('Form validation passed!');
+            // In real app, you'd submit via fetch() or form.submit()
+          }
+        });
+
+        [username, password].forEach(function (input) {
+          if (!input) return;
+          input.addEventListener('input', function () {
+            clearError(input);
+            const u = username && username.value ? username.value.trim() : '';
+            const p = password && password.value ? password.value.trim() : '';
+            if (u && p) {
+              summary.textContent = '';
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
